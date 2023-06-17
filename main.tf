@@ -1,9 +1,13 @@
-resource "null_resource" "test" {
-  triggers = {
-    xyz = timestamp()
-  }
-provisioner "local-exec" {
-  command = "echo Hello World - env - ${var.env}"
-}
-
-}
+#1.Policy
+#
+#2.Iam Role
+#
+#3. Security Group
+#
+#4. EC2 Instance
+#
+#
+#5. DNS Records (Route 53)
+#
+#
+#6. Null Resource - Ansible
