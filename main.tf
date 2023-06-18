@@ -41,10 +41,6 @@ resource "aws_iam_role" "role" {
       },
     ]
   })
-
-  tags = {
-    tag-key = "${var.component}-${var.env}-ec2-role"
-  }
 }
 
 resource "aws_iam_instance_profile" "instance_profile" {
