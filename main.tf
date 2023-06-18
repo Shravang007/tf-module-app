@@ -37,8 +37,8 @@ resource "aws_iam_role" "role" {
           "Service": "ec2.amazonaws.com"
         },
         "Action": "sts:AssumeRole"
-      },
-    ]
+      }
+    ],
   })
 }
 
