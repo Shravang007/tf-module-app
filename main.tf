@@ -1,3 +1,5 @@
+#1. IAM Policy
+
 resource "aws_iam_policy" "policy" {
   name        = "${var.component}-${var.env}-ssm-pm-policy"
   path        = "/"
@@ -21,7 +23,7 @@ resource "aws_iam_policy" "policy" {
   })
 }
 
-## Iam Role
+##2. Iam Role
 
 resource "aws_iam_role" "role" {
   name = "${var.component}-${var.env}-ec2-role"
@@ -51,6 +53,8 @@ resource "aws_iam_role_policy_attachment" "policy-attach" {
   policy_arn = aws_iam_policy.policy.arn
 }
 
+#3. Security Group
+
 resource "aws_security_group" "sg" {
   name        = "${var.component}-${var.env}-sg"
   description = "${var.component}-${var.env}-sg"
@@ -74,6 +78,8 @@ resource "aws_security_group" "sg" {
   }
 }
 
+#4. EC2 Instance
+
 resource "aws_instance" "instance" {
   ami                    = data.aws_ami.ami.id
   instance_type          = "t3.small"
@@ -87,6 +93,8 @@ resource "aws_instance" "instance" {
 
 }
 
+#5. DNS Record (Route 53)
+
 resource "aws_route53_record" "dns" {
   zone_id = "Z08411971YPWLUUTH65Y1"
   name    = "${var.component}-dev"
@@ -94,6 +102,8 @@ resource "aws_route53_record" "dns" {
   ttl     = 30
   records = [aws_instance.instance.private_ip]
 }
+
+#6. Null Resource - Ansible
 
 resource "null_resource" "ansible" {
   depends_on = [aws_instance.instance, aws_route53_record.dns]
