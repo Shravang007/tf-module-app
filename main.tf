@@ -1,4 +1,21 @@
 #1. IAM Policy
+for_each  = var.component
+env       = var.env
+
+component = {
+
+  frontend  = {}
+  mongodb   = {}
+  catalogue = {}
+  redis     = {}
+  user      = {}
+  cart      = {}
+  mysql     = {}
+  shipping  = {}
+  rabbitmq  = {}
+  payment   = {}
+
+}
 
 resource "aws_iam_policy" "policy" {
   name        = "${var.component}-${var.env}-ssm-pm-policy"
