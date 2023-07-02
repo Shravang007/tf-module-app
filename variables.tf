@@ -4,4 +4,5 @@ variable "tags" {
   default = {}
 }
 
-
+variable "subnet_id" {}
+variable "vpc_id" {}
