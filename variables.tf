@@ -4,3 +4,5 @@ variable "tags" {
   default = {}
 }
 
+variable "subnet_id" {}
+
