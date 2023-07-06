@@ -120,13 +120,13 @@ resource "aws_lb_target_group" "main" {
 
 
 
-#resource "aws_route53_record" "dns" {
-#  zone_id = "Z055331734ICV430E01P7"
-#  name    = "${var.component}-${var.env}"
-#  type    = "CNAME"
-#  ttl     = 30
-#  records = [var.lb_dns_name]
-#}
+resource "aws_route53_record" "dns" {
+  zone_id = "Z08411971YPWLUUTH65Y1"
+  name    = "${var.component}-${var.env}"
+  type    = "CNAME"
+  ttl     = 30
+  records = [var.lb_dns_name]
+}
 
 
 
