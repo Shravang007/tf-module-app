@@ -1,3 +1,4 @@
+#1. IAM Policy
 resource "aws_iam_policy" "policy" {
   name        = "${var.component}-${var.env}-ssm-pm-policy"
   path        = "/"
@@ -13,11 +14,9 @@ resource "aws_iam_policy" "policy" {
           "ssm:GetParameterHistory",
           "ssm:GetParametersByPath",
           "ssm:GetParameters",
-          "ssm:GetParameter",
-          "kms:Decrypt"
+          "ssm:GetParameter"
         ],
-        "Resource" :
-        "arn:aws:ssm:us-east-1:752442278108:parameter/roboshop.${var.env}.${var.component}.*"
+        "Resource" : "arn:aws:ssm:us-east-1:752442278108:parameter/roboshop.${var.env}.${var.component}.*"
       }
     ]
   })
