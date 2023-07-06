@@ -36,12 +36,12 @@ resource "aws_security_group" "main" {
   }
 }
 
-resource "aws_lb_target_group" "main" {
-  name                 = "${var.component}-${var.env}-tg"
-  port                 = var.app_port
-  protocol             = "HTTP"
-#  deregistration_delay = 30
-  vpc_id               = var.vpc_id
+#resource "aws_lb_target_group" "main" {
+#  name                 = "${var.component}-${var.env}-tg"
+#  port                 = var.app_port
+#  protocol             = "HTTP"
+##  deregistration_delay = 30
+#  vpc_id               = var.vpc_id
 
 #  health_check {
 #    enabled             = true
@@ -52,8 +52,8 @@ resource "aws_lb_target_group" "main" {
 #    timeout             = 4
 #    healthy_threshold   = 2
 #    unhealthy_threshold = 2
-  }
-}
+#  }
+
 
 #resource "aws_lb_listener_rule" "static" {
 #  listener_arn = var.listener_arn
@@ -92,6 +92,7 @@ resource "aws_launch_template" "main" {
       env       = var.env
       component = var.component
     }))
+}
 
 #  block_device_mappings {
 #    device_name = "/dev/sda1"
