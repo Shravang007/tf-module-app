@@ -10,13 +10,6 @@ resource "aws_security_group" "main" {
     cidr_blocks = var.sg_subnets_cidr
   }
 
-#  ingress {
-#    from_port   = 9100
-#    to_port     = 9100
-#    protocol    = "tcp"
-#    cidr_blocks = var.allow_prometheus_cidr
-#  }
-#
   ingress {
     from_port   = 22
     to_port     = 22
@@ -40,36 +33,8 @@ resource "aws_lb_target_group" "main" {
   name     = "${var.component}-${var.env}-tg"
   port     = var.app_port
   protocol = "HTTP"
-  #  deregistration_delay = 30
   vpc_id   = var.vpc_id
-
-#  health_check {
-#    enabled             = true
-#    interval            = 5
-#    path                = "/health"
-#    port                = var.app_port
-#    protocol            = "HTTP"
-#    timeout             = 4
-#    healthy_threshold   = 2
-#    unhealthy_threshold = 2
   }
-
-
-  #resource "aws_lb_listener_rule" "static" {
-  #  listener_arn = var.listener_arn
-  #  priority     = var.lb_rule_priority
-  #
-  #  action {
-  #    type             = "forward"
-  #    target_group_arn = aws_lb_target_group.main.arn
-  #  }
-  #
-  #  condition {
-  #    host_header {
-  #      values = ["${var.component}-${var.env}.devopspractice73.online"]
-  #    }
-  #  }
-  #}
 
 
   resource "aws_launch_template" "main" {
@@ -243,3 +208,30 @@ resource "aws_route53_record" "dns" {
 #  }
 #}
 #
+
+
+#resource "aws_lb_listener_rule" "static" {
+#  listener_arn = var.listener_arn
+#  priority     = var.lb_rule_priority
+#
+#  action {
+#    type             = "forward"
+#    target_group_arn = aws_lb_target_group.main.arn
+#  }
+#
+#  condition {
+#    host_header {
+#      values = ["${var.component}-${var.env}.devopspractice73.online"]
+#    }
+#  }
+#}
+
+#  health_check {
+#    enabled             = true
+#    interval            = 5
+#    path                = "/health"
+#    port                = var.app_port
+#    protocol            = "HTTP"
+#    timeout             = 4
+#    healthy_threshold   = 2
+#    unhealthy_threshold = 2
