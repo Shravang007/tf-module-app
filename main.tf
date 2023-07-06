@@ -66,7 +66,7 @@ resource "aws_lb_target_group" "main" {
   #
   #  condition {
   #    host_header {
-  #      values = ["${var.component}-${var.env}.rdevopsb73.online"]
+  #      values = ["${var.component}-${var.env}.devopspractice73.online"]
   #    }
   #  }
   #}
@@ -94,17 +94,6 @@ resource "aws_lb_target_group" "main" {
       }))
   }
 
-  #  block_device_mappings {
-  #    device_name = "/dev/sda1"
-  #
-  #    ebs {
-  #      volume_size = 10
-  #      encrypted   = "true"
-  #      kms_key_id  = var.kms_key_id
-  #    }
-  #  }
-  #}
-  #
   resource "aws_autoscaling_group" "main" {
     desired_capacity    = var.desired_capacity
     max_size            = var.max_size
@@ -119,10 +108,9 @@ resource "aws_lb_target_group" "main" {
   }
 
 
-
 resource "aws_route53_record" "dns" {
   zone_id = "Z08411971YPWLUUTH65Y1"
-  name    = "${var.component}-dev"
+  name    = "${var.component}-${var.env}"
   type    = "CNAME"
   ttl     = 30
   records = [var.lb_dns_name]
