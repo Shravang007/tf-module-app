@@ -34,7 +34,18 @@ resource "aws_lb_target_group" "main" {
   port     = var.app_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+
+  health_check {
+    enabled             = true
+    interval            = 5
+    path                = "/health"
+    port                = var.app_port
+    protocol            = "HTTP"
+    timeout             = 4
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
   }
+}
 
 resource "aws_lb_listener_rule" "static" {
   listener_arn = var.listener_arn
@@ -243,12 +254,3 @@ resource "aws_route53_record" "dns" {
 #  }
 #}
 
-#  health_check {
-#    enabled             = true
-#    interval            = 5
-#    path                = "/health"
-#    port                = var.app_port
-#    protocol            = "HTTP"
-#    timeout             = 4
-#    healthy_threshold   = 2
-#    unhealthy_threshold = 2
