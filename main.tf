@@ -59,7 +59,7 @@ resource "aws_lb_listener_rule" "static" {
 
   condition {
     host_header {
-      values = ["${var.component}-${var.env}.devopspractice73.online"]
+      values = ["${local.dns_name}.devopspractice73.online"]
     }
   }
 }
@@ -104,7 +104,7 @@ resource "aws_lb_listener_rule" "static" {
 
 resource "aws_route53_record" "dns" {
   zone_id = "Z08411971YPWLUUTH65Y1"
-  name    = "${var.component}-${var.env}"
+  name    = local.dns_name
   type    = "CNAME"
   ttl     = 30
   records = [var.lb_dns_name]
