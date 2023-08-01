@@ -101,6 +101,20 @@ resource "aws_lb_listener_rule" "static" {
     }
   }
 
+resource "aws_autoscaling_policy" "asg-cpu-rule" {
+  name                       = "CPULoadDetect"
+  autoscaling_group_name     = aws_autoscaling_group.main.name
+  policy_type                = "TargetTrackingScaling"
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 30.0
+  }
+}
+
+
 
 resource "aws_route53_record" "dns" {
   zone_id = "Z08411971YPWLUUTH65Y1"
